@@ -5,15 +5,12 @@ from . import models
 
 
 class ContactForm(forms.ModelForm):
-    first_name = forms.CharField(
-        widget=forms.TextInput(
+    picture = forms.ImageField(
+        widget=forms.FileInput(
             attrs={
-                'class': 'classe-a',
-                'placeholder': 'Aqui veio do init',
+                'accept': 'image/*',
             }
-        ),
-        label='Nome',
-        help_text='Texto de ajuda para o usuário'
+        )
     )
 
     class Meta:
@@ -21,9 +18,9 @@ class ContactForm(forms.ModelForm):
         fields = (
             'first_name', 'last_name', 'phone',
             'email', 'description', 'category',
+            'picture',
         )
 
-    
     def clean(self):
         cleaned_data = self.cleaned_data
         first_name = cleaned_data.get('first_name')
